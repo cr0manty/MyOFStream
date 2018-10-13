@@ -32,8 +32,8 @@ class MyOFStream
 	void write(std::string);
 	void bin(int);
 
-	MyOFStream& operator =(const MyOFStream &);
-	MyOFStream(const MyOFStream&);
+	MyOFStream& operator =(const MyOFStream &) = delete;
+	MyOFStream(const MyOFStream&) = delete;
 public:
 	MyOFStream();
 	MyOFStream(std::string, strString = &fof::rw);

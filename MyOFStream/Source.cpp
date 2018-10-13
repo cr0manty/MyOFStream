@@ -33,8 +33,9 @@ int main()
 	char k[] = "testMyFile.txt";
 	int i = 10408080;
 	MyOFStream file1;
-
+	
 	file1.open("text.txt");
+	file1 << '1';
 	file1 << "Hello World!" << stf::endl;
 	file1 << k << stf::endl;
 	file1 ? std::cout << "open" << std::endl : std::cout << "not open" << std::endl;

@@ -32,14 +32,14 @@ void MyOFStream::write(std::string _output)
 
 void MyOFStream::flush()
 {
-	fflush(file);
+	fflush(this->file);
 }
 
 void MyOFStream::close()
 {
-	if (file)
+	if (this->file)
 	{
-		fclose(file);
+		fclose(this->file);
 		this->file = nullptr;
 	}
 }
@@ -65,8 +65,9 @@ MyOFStream & MyOFStream::operator<<(const char *_output)
 
 MyOFStream & MyOFStream::operator<<(char _output)
 {
-	std::string buff;
-	buff = _output;
+	char *buff = new char[2];
+	buff[0] = _output;
+	buff[1] = 0;
 	write(buff);
 
 	return *this;
@@ -124,7 +125,7 @@ MyOFStream & MyOFStream::operator<<(bool _output)
 
 MyOFStream &MyOFStream::operator<<(manip _m)
 {
-	if (file)
+	if (this->file)
 		return (*_m) (*this);
 }
 
