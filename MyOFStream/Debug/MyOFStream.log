@@ -1,6 +1,0 @@
-﻿  ofstream.cpp
-  Source.cpp
-c:\users\user\source\repos\myofstream\myofstream\source.cpp(8): warning C4305: инициализация: усечение из "int" в "bool"
-  Создание кода...
-c:\users\user\source\repos\myofstream\myofstream\ofstream.cpp(129): warning C4715: MyOFStream::operator<<: значение возвращается не при всех путях выполнения
-  MyOFStream.vcxproj -> C:\Users\User\source\repos\MyOFStream\Debug\MyOFStream.exe
