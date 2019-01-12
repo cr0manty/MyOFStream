@@ -1,20 +1,21 @@
 #include "ofstream.h"
 
-MyOFStream::MyOFStream() : name(" "), flag("w"), intTypeOut(stf::dec)
+stf::MyOFStream::MyOFStream() : 
+	name(" "), flag("w"), intTypeOut(stf::dec)
 {
 }
 
-MyOFStream::MyOFStream(std::string _name, strString _flag) : intTypeOut(stf::dec)
+stf::MyOFStream::MyOFStream(const std::string &_name, strString _flag) : intTypeOut(stf::dec)
 {
 	open(_name, _flag);
 }
 
-MyOFStream::~MyOFStream()
+stf::MyOFStream::~MyOFStream()
 {
 	if (this->file) close();
 }
 
-void MyOFStream::open(std::string _name, strString _flag)
+void stf::MyOFStream::open(const std::string &_name, strString _flag)
 {
 	name = _name;
 	flag = _flag(flag);
@@ -24,18 +25,18 @@ void MyOFStream::open(std::string _name, strString _flag)
 	}
 }
 
-void MyOFStream::write(std::string _output)
+void stf::MyOFStream::write(std::string _output)
 {
 	if (this->file)
 		fprintf(file, "%s", _output.c_str());
 }
 
-void MyOFStream::flush()
+void stf::MyOFStream::flush()
 {
 	fflush(this->file);
 }
 
-void MyOFStream::close()
+void stf::MyOFStream::close()
 {
 	if (this->file)
 	{
@@ -44,26 +45,26 @@ void MyOFStream::close()
 	}
 }
 
-MyOFStream::operator bool()
+stf::MyOFStream::operator bool()
 {
 	return this->file;
 }
 
-MyOFStream & MyOFStream::operator<<(std::string _output)
+stf::MyOFStream & stf::MyOFStream::operator<<(const std::string &_output)
 {
 	write(_output);
 
 	return *this;
 }
 
-MyOFStream & MyOFStream::operator<<(const char *_output)
+stf::MyOFStream & stf::MyOFStream::operator<<(const char *_output)
 {
 	write(_output);
 
 	return *this;
 }
 
-MyOFStream & MyOFStream::operator<<(char _output)
+stf::MyOFStream & stf::MyOFStream::operator<<(char _output)
 {
 	char *buff = new char[2];
 	buff[0] = _output;
@@ -73,7 +74,7 @@ MyOFStream & MyOFStream::operator<<(char _output)
 	return *this;
 }
 
-void MyOFStream::bin(int _output)
+void stf::MyOFStream::bin(int _output)
 {
 	std::string bin;
 
@@ -85,7 +86,7 @@ void MyOFStream::bin(int _output)
 	write(bin);
 }
 
-MyOFStream &MyOFStream::operator<<(int _output)
+stf::MyOFStream & stf::MyOFStream::operator<<(int _output)
 {
 	char *buffer = new char[25];
 
@@ -104,7 +105,7 @@ MyOFStream &MyOFStream::operator<<(int _output)
 	return *this;
 }
 
-MyOFStream &MyOFStream::operator<<(double _output)
+stf::MyOFStream & stf::MyOFStream::operator<<(double _output)
 {
 	char *buffer = new char[25];
 
@@ -116,51 +117,51 @@ MyOFStream &MyOFStream::operator<<(double _output)
 	return *this;
 }
 
-MyOFStream & MyOFStream::operator<<(bool _output)
+stf::MyOFStream & stf::MyOFStream::operator<<(bool _output)
 {
 	_output ? write("1") : write("0");
 
 	return *this;
 }
 
-MyOFStream &MyOFStream::operator<<(manip _m)
+stf::MyOFStream & stf::MyOFStream::operator<<(const manip &_m)
 {
 	if (this->file)
 		return (*_m) (*this);
 }
 
-MyOFStream &MyOFStream::operator<<(strString _s)
+stf::MyOFStream & stf::MyOFStream::operator<<(const strString &_s)
 {
 	intTypeOut = _s;
 	return *this;
 }
 
-MyOFStream &MyOFStream::setf(strString _s)
+stf::MyOFStream & stf::MyOFStream::setf(strString _s)
 {
 	intTypeOut = _s;
 	return *this;
 }
 
-MyOFStream &MyOFStream::unsetf()
+stf::MyOFStream & stf::MyOFStream::unsetf()
 {
 	intTypeOut = stf::dec;
 
 	return *this;
 }
 
-std::string & fof::rw(std::string & _s)
+std::string & stf::rw(std::string & _s)
 {
 	_s = "w";
 	return _s;
 }
 
-std::string & fof::add(std::string & _s)
+std::string & stf::add(std::string & _s)
 {
 	_s = "a";
 	return _s;
 }
 
-MyOFStream &stf::endl(MyOFStream &_s)
+stf::MyOFStream &stf::endl(MyOFStream &_s)
 {
 	_s.write("\n");
 	_s.flush();
